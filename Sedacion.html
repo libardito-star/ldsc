@@ -27,9 +27,15 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',
 .container{width:100%;max-width:1040px;background:var(--surface);border-radius:16px;box-shadow:var(--shadow);overflow:clip;border:1px solid var(--line)}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
-header{background:var(--brand);color:var(--brand-ink);padding:30px 32px 26px}
+/* Header ajustado para incluir el botón en la esquina superior derecha */
+header{background:var(--brand);color:var(--brand-ink);padding:30px 32px 26px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
 header h1{margin:0;font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:700;letter-spacing:-.015em;line-height:1.15;max-width:22ch}
 header p{margin:8px 0 0;font-size:.95rem;opacity:.8}
+
+/* Estilos del botón Volver Pagina Principal */
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);color:var(--brand-ink);text-decoration:none;padding:9px 14px;border-radius:8px;font-size:.88rem;font-weight:600;border:1px solid rgba(255,255,255,.25);transition:background .15s,border-color .15s;white-space:nowrap}
+.btn-home:hover{background:rgba(255,255,255,.24);border-color:rgba(255,255,255,.45)}
+.btn-home svg{flex-shrink:0}
 
 .lbm{background:var(--sunk);padding:18px 32px 16px;border-bottom:1px solid var(--line)}
 .lbm h2{margin:0 0 12px;font-size:.95rem;font-weight:600;color:var(--muted)}
@@ -95,7 +101,19 @@ header,.lbm,.tabs-content,.aviso{padding-left:16px;padding-right:16px}.tabs-head
 </head>
 <body>
 <div class="container">
-<header><h1>Protocolos de Sedación Endovenosa Dinámica</h1><p>Esquemas de dosis y calculadora de infusión</p></header>
+<header>
+  <div>
+    <h1>Protocolos de Sedación Endovenosa Dinámica</h1>
+    <p>Esquemas de dosis y calculadora de infusión</p>
+  </div>
+  <a href="index.html" class="btn-home">
+    <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+    </svg>
+    Volver Pagina Principal
+  </a>
+</header>
 
 <section class="lbm" aria-labelledby="lbm-title">
 <h2 id="lbm-title">Peso corporal magro (PCM) · Modelo de Janmahasatian</h2>
