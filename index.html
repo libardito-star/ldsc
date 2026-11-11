@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Principal - Mi Sitio Web</title>
+  <style>
+    :root {
+      --bg-color: #f4f7f6;
+      --sidebar-bg: #1e293b;
+      --sidebar-text: #f8fafc;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --card-bg: #ffffff;
+      --text-main: #334155;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+    }
+
+    /* Barra lateral */
+    .sidebar {
+      width: 250px;
+      background-color: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      text-align: center;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 15px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      display: block;
+      color: var(--sidebar-text);
+      text-decoration: none;
+      padding: 12px 15px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      background-color: var(--primary);
+    }
+
+    /* Contenido principal */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    header {
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: #0f172a;
+    }
+
+    header p {
+      color: var(--text-muted);
+    }
+
+    /* Cuadrícula de tarjetas */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .card a {
+      display: inline-block;
+      text-align: center;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .card a:hover {
+      background-color: var(--primary-hover);
+    }
+
+    /* Adaptable a celulares */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menú Lateral -->
+  <aside class="sidebar">
+    <h2>Mi Proyecto</h2>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Inicio / Dashboard</a></li>
+      <li><a href="pagina1.html">Sección 1 (Ej. Usuarios)</a></li>
+      <li><a href="pagina2.html">Sección 2 (Ej. Reportes)</a></li>
+      <li><a href="pagina3.html">Sección 3 (Ej. Productos)</a></li>
+      <li><a href="contacto.html">Contacto / Ajustes</a></li>
+    </ul>
+  </aside>
+
+  <!-- Área Principal -->
+  <main class="main-content">
+    <header>
+      <h1>Bienvenido al Panel de Control</h1>
+      <p>Selecciona una de las secciones interiores para comenzar.</p>
+    </header>
+
+    <section class="dashboard-grid">
+      <div class="card">
+        <div>
+          <h3>Sección 1</h3>
+          <p>Accede a la gestión principal, listados o información detallada de esta área.</p>
+        </div>
+        <a href="pagina1.html">Ir a Sección 1</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h3>Sección 2</h3>
+          <p>Consulta estadísticas, gráficos o documentos importantes guardados en el sistema.</p>
+        </div>
+        <a href="pagina2.html">Ir a Sección 2</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h3>Sección 3</h3>
+          <p>Administra tu catálogo, servicios o recursos disponibles para los visitantes.</p>
+        </div>
+        <a href="pagina3.html">Ir a Sección 3</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h3>Contacto</h3>
+          <p>Revisa los mensajes recibidos o configura los datos de atención al cliente.</p>
+        </div>
+        <a href="contacto.html">Ir a Contacto</a>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

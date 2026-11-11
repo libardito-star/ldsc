@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Protocolos de Sedación Endovenosa Dinámica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#eaf0f2;--surface:#fff;--sunk:#f3f7f8;--ink:#12252c;--muted:#526870;--line:#d3dfe3;
+--brand:#0d4756;--brand-ink:#fff;--accent:#0a7a8a;--accent-soft:#e0f1f4;
+--warn:#85560a;--warn-bg:#fff3d6;--ok:#1a7a58;--focus:#d98200;--shadow:0 1px 2px rgba(13,40,48,.08),0 8px 24px -12px rgba(13,40,48,.18);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+--bg:#0b171c;--surface:#13252c;--sunk:#0f2026;--ink:#e5eef1;--muted:#9bb1b8;--line:#25414b;
+--brand:#0a3541;--brand-ink:#f2fafc;--accent:#58c6d6;--accent-soft:#12363f;
+--warn:#f0b64a;--warn-bg:#352a0c;--ok:#52d3a2;--focus:#f0a020;--shadow:0 8px 24px -12px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{
+--bg:#0b171c;--surface:#13252c;--sunk:#0f2026;--ink:#e5eef1;--muted:#9bb1b8;--line:#25414b;
+--brand:#0a3541;--brand-ink:#f2fafc;--accent:#58c6d6;--accent-soft:#12363f;
+--warn:#f0b64a;--warn-bg:#352a0c;--ok:#52d3a2;--focus:#f0a020;--shadow:0 8px 24px -12px rgba(0,0,0,.6);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;font-size:16px;line-height:1.55;padding:24px 16px 48px;display:flex;justify-content:center;font-variant-numeric:tabular-nums}
+.container{width:100%;max-width:1040px;background:var(--surface);border-radius:16px;box-shadow:var(--shadow);overflow:clip;border:1px solid var(--line)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+header{background:var(--brand);color:var(--brand-ink);padding:30px 32px 26px}
+header h1{margin:0;font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:700;letter-spacing:-.015em;line-height:1.15;max-width:22ch}
+header p{margin:8px 0 0;font-size:.95rem;opacity:.8}
+
+.lbm{background:var(--sunk);padding:18px 32px 16px;border-bottom:1px solid var(--line)}
+.lbm h2{margin:0 0 12px;font-size:.95rem;font-weight:600;color:var(--muted)}
+.lbm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.lbm-grid label,.form-group label{display:block;font-size:.82rem;margin-bottom:4px;color:var(--muted);font-weight:500}
+.lbm-grid input,.lbm-grid select,.form-group input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:1rem;background:var(--surface);color:var(--ink)}
+.lbm-grid input:focus,.lbm-grid select:focus,.form-group input:focus{border-color:var(--accent)}
+.lbm-result{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.lbm-kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.lbm-kpi span{display:block;font-size:.78rem;color:var(--muted)}
+.lbm-kpi strong{font-size:1.4rem;font-weight:600;color:var(--accent);line-height:1.2}
+.lbm-msg{grid-column:1/-1;margin:0;color:var(--warn);font-weight:600;font-size:.9rem}
+.lbm-formula{margin:12px 0 0;font-size:.78rem;color:var(--muted);line-height:1.55}
+
+.tabs-header{display:flex;gap:6px;padding:12px 32px;background:var(--surface);border-bottom:1px solid var(--line);overflow-x:auto;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.tab-button{flex:0 0 auto;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font:inherit;font-size:.88rem;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;transition:background .15s,color .15s,border-color .15s}
+.tab-button:hover{border-color:var(--accent);color:var(--ink)}
+.tab-button.active{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+
+.tabs-content{padding:32px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.tab-panel>h2{margin:0 0 4px;font-size:1.6rem;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.tab-panel>p{margin:0 0 24px;color:var(--muted);max-width:68ch}
+
+.med-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:18px;margin-bottom:24px;align-items:start}
+.med-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:18px}
+.med-grid .med-card{margin-bottom:0}
+.med-card h3{margin:0 0 12px;font-size:1.15rem;font-weight:700;color:var(--ink);padding-left:12px;border-left:4px solid var(--accent);line-height:1.2}
+.full{grid-column:1/-1}
+.subseccion-titulo{font-size:.95rem;font-weight:700;color:var(--accent);margin:18px 0 4px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+.instrucciones-lista{margin:6px 0 8px;padding-left:22px;font-size:.93rem;line-height:1.6;color:var(--ink)}
+.instrucciones-lista li{margin-bottom:10px;padding-left:4px}
+.instrucciones-lista li::marker{color:var(--accent);font-weight:600}
+.instrucciones-lista strong{font-weight:600}
+.instrucciones-lista ul{margin:4px 0;padding-left:18px}
+.ref{display:inline-block;font-size:.76rem;background:var(--warn-bg);color:var(--warn);border-radius:6px;padding:2px 8px;font-weight:600}
+
+.calc .med-card{background:var(--accent-soft);border-color:transparent}
+.calc-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;align-items:end;padding:14px 0;border-bottom:1px solid var(--line)}
+.calc-row:last-of-type{border-bottom:0}
+.calc-row .nombre{font-weight:600}
+.calc-row small{display:block;color:var(--muted);font-weight:400;font-size:.8rem}
+.btn-calc{background:var(--brand);color:var(--brand-ink);border:0;padding:14px 20px;border-radius:10px;cursor:pointer;font:inherit;font-size:1rem;width:100%;font-weight:600;margin-top:14px;transition:filter .15s}
+.btn-calc:hover{filter:brightness(1.15)}
+.results-box{margin-top:18px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--ok);border-radius:10px;display:none;overflow-x:auto}
+.results-box p{margin:0 0 8px}
+.results-box table{width:100%;border-collapse:collapse;font-size:.93rem;min-width:420px}
+.results-box th{text-align:left;padding:6px 8px;color:var(--muted);font-weight:500;font-size:.8rem;border-bottom:1px solid var(--line)}
+.results-box td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
+.results-box td:last-child strong{font-size:1.15rem;color:var(--ok)}
+.alerta{color:var(--warn);background:var(--warn-bg);padding:8px 12px;border-radius:8px;font-weight:600;margin:10px 0 0;font-size:.88rem}
+
+.aviso{font-size:.8rem;color:var(--muted);padding:18px 32px 26px;border-top:1px solid var(--line);line-height:1.55;margin:0;background:var(--sunk)}
+
+@media(max-width:640px){
+body{padding:0 0 32px}.container{border-radius:0;border-left:0;border-right:0}
+header,.lbm,.tabs-content,.aviso{padding-left:16px;padding-right:16px}.tabs-header{padding:10px 16px}
+.tabs-content{padding-top:22px;padding-bottom:22px}.med-card{padding:16px}
+.calc-row{grid-template-columns:1fr}}
+@media(min-width:900px){.lbm{position:sticky;top:0;z-index:6}.tabs-header{top:var(--lbm-h,0px)}}
+</style>
+</head>
+<body>
+<div class="container">
+<header><h1>Protocolos de Sedación Endovenosa Dinámica</h1><p>Esquemas de dosis y calculadora de infusión</p></header>
+
+<section class="lbm" aria-labelledby="lbm-title">
+<h2 id="lbm-title">Peso corporal magro (PCM) · Modelo de Janmahasatian</h2>
+<div class="lbm-grid">
+<div><label for="lbm-sexo">Sexo</label>
+<select id="lbm-sexo"><option value="M">Hombre</option><option value="F">Mujer</option></select></div>
+<div><label for="lbm-peso">Peso total (kg)</label>
+<input type="number" id="lbm-peso" value="60" min="1" max="350" step="0.5"></div>
+<div><label for="lbm-talla">Talla (cm)</label>
+<input type="number" id="lbm-talla" value="160" min="100" max="230" step="1"></div>
+</div>
+<div class="lbm-result" id="lbm-result" aria-live="polite"></div>
+<p class="lbm-formula">
+<strong>Hombre:</strong> PCM = 9270 × peso / (6680 + 216 × IMC) &nbsp;·&nbsp;
+<strong>Mujer:</strong> PCM = 9270 × peso / (8780 + 244 × IMC). Peso en kg, IMC = peso / talla² (m).
+</p>
+</section>
+
+<div class="tabs-header" role="tablist" aria-label="Protocolos">
+<button class="tab-button active" role="tab" aria-selected="true" aria-controls="tab-pl" data-tab="tab-pl">Lidocaína · Propofol</button>
+<button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-plr" data-tab="tab-plr">L-P-Remifentanilo</button>
+<button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-plk" data-tab="tab-plk">L-P-K (Ketamina)</button>
+<button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-comp" data-tab="tab-comp">Complicaciones</button>
+</div>
+
+<div class="tabs-content">
+
+<!-- TAB 1 -->
+<div id="tab-pl" class="tab-panel active" role="tabpanel">
+<h2>Lidocaína - Propofol</h2>
+<p>Configuración y pautas de administración para el mantenimiento anestésico básico.</p>
+<div class="med-grid">
+<div class="med-card"><h3>Lidocaína</h3>
+<ol class="instrucciones-lista">
+<li><strong>Acción:</strong> Bloquea canales de Na, modula transmisión central y periférica del dolor</li>
+<li><strong>Latencia y Duración:</strong> En bolo de 45-90 segs x 5-8 minutos.</li>
+<li><strong>Beneficios:</strong> Potenciador propofol y analgésicos. reduce respuesta simpática (taquicardia, hipertensión), 
+somnolencia, despertar confortable y más rápido, <br> atenuación reflejo tusígeno y nauseoso y dolor, reduce movimientos involuntarios, analgesia catéter y vena.</li>
+<li><strong>Preparación:</strong>
+    <br> Tomar 6 cc (1% 10mg/cc) y llevarlos a 20 cc (concentración final de <strong>3 mg/cc</strong>).
+    <br> Tomar 3 cc (2% 20mg/cc) y llevarlos a 20 cc (concentración final de <strong>3 mg/cc</strong>).
+</li>
+<li><strong>Tiempo:</strong> Aplicar 1-2 mins rango 2-4 mins, más aceptado 3 minutos antes de instrumentación.</li>
+<li><strong>Dosis:</strong> Administrar <strong>1-1.5mg/kg 7 cc - 10cc ( 21 - 30 mg)</strong> en 1 minuto (velocidad 25mg/min),
+ aplicar mitad de la dosis de Propofol en el minuto siguiente. Y continuar con la segunda dosis de Lidocaína (20-30 mg 1 minuto) se debe administrar fraccionada (Food and Drug Administration, 2026)
+ Terminar con la segunda dosis de Propofol.
+<br>Infusión continua de 2-4 mg/kg/h o sea 1-2 mg minuto (Journal Anestesia 2025 Rinaldi P.)
+<br>Mitad de la dosis: Insuficiencia Hepática o renal GRAVE, > 70 años, Apariencia débil, ASA >2
+<br>NO interaccion farmacodinamica si se usa Remifentanilo, diferentes mecanismos de accion y no competitivos (Digestive Diseases and Sciences 2020).
+</li>
+<li><strong>Contraindicada:</strong> Hipersensibilidad a AMIDAS, Bloqueo II-III, Bradicardia menor 50 bpm, ICC severa, 
+Falla Hepática o renal grave, Epilepsia - trastornos convulsivos NO controlados. Embarazo y Lactancia</li>
+<li><strong>Toxicidad leve-moderada:</strong> Sabor metalico, parestesias periorales y linguales, mareo, tinnitus, visión borrosa,
+agitación, confusión, acúfenos, temblores</li>
+<li><strong>Toxicidad Grave:</strong> Convulsiones, coma (síntomas neurológicos 8 mg/kg),
+<br>CARDIOTOXICIDAD: colapso cardiovascular, bradiarritmias, paro. (dosis 10-12 mg/kg Drugs, 2018. Beaussier M)
+</li>
+<li><strong>Manejo de Emergencia:</strong> O2, ventilación bolsa-máscara, si convulsiones dosis baja de propofol, intralipid.</li>
+<li><strong>Prevención de eventos tóxicos:</strong> Dosis menor a dosis máxima acumulada (7 mg/kg aprox 500 mg), fraccionar la administración, usar concentración mínima eficaz, monitorización continua</li>
+</ol></div>
+
+<div class="med-card"><h3>Propofol</h3>
+<ol class="instrucciones-lista">
+<li><strong>Acción:</strong> Bloquea receptores GABA en SNC.</li>
+<li><strong>Beneficios:</strong> Sedante, amnésico, antiemético.</li>
+<li><strong>Inicio y duración:</strong> 30-60 seg, efecto máximo 2-3 mins, x 3-10 mins.</li>
+<li><strong>Dosis Inicial:</strong> 1 - 2 mg/kg (para un promedio de 60 kg, administrar dosis de <strong>60 a 120 mg</strong> en 1 minuto).
+<br>INFUSIÓN CONTINUA: 25-75 mcg/kg/min (60 kg: 1.5 a 4.5 mg/min) incrementos no mayores a 50 mcg/kg/min (3mg/min) y 
+bolos de rescate no mayores a 0.25 mg/kg/min (15 mg) monitorización del nivel de sedación cada 5 mins (Clinical Gastroenterology and Hepatology 2021. Lee HS)
+<br> BOLO INICIAL: menores de 70 años 60-80 mg, 70 a 89 años 40-60 mg, 90 o + solo 20 mg.
+<br>IMC mayor a 35 la depuración y volumen periférico aumentan, SENSIBILIDAD CEREBRAL AUMENTA (el EC50 baja un 38%) (Drug Metabolism and Disposition, 2026. Dong D) luego utilizar 
+IBW (20% mayor que el LBW) para bolo inicial y Masa Magra para mantenimiento.
+luego usar PCM.
+<br>SAHOS
+</li>
+<li><strong>Bolos de refuerzo:</strong> Cada 2-3 minutos administrar <strong>20-30 mg</strong>.</li>
+<li><strong>Farmacocinética:</strong> Lipofílico, usar PCM. Bolo aislado, la grasa lo atrapa y termina más rápido su efecto. 
+Horas de infusión: al interrumpir el fármaco persiste la acción al volver al torrente sanguíneo (efecto de liberación lenta).</li>
+<li><strong>Contraindicada:</strong> Alergia al Propofol, Reacción anafiláctica a lecitina del huevo o soya</li>
+<li><strong>Toxicidad</strong>
+<br> <strong>Prevención</strong>
+<ul>
+<li>Dosis fraccionada (25-50% dosis teorica) y esperar 60 segs para el resto de dosis. </li>
+<li> Aplicación lenta 60 segs </li>
+<li> Disminuir la dosis si aplicada con remifentanilo o en adulto mayor (reducir bolo en un 30% a 50%)</li>
+<li> Precarga hídrica adecuada para contrarrestar la vasodilatación periférica. (Infusión IV SSN 200 - 250 cc)</li>
+</ul>
+<strong>Eventos:</strong>
+<ul>
+<li> Hipotensión arterial severa. Bradicardia extrema y asistolia (por inhibición simpática y liberación de acción vagal)</li>
+<li> Depresión respiratoria aguda - apnea 30 segs a 3 mins, obstrucción vía aérea por relajación de músculos faríngeos.</li>
+<li> Movimientos mioclónicos o involuntarios (confundir con convulsiones) desinhibición transitoria de subestructuras corticales.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div class="calc" data-drugs="propofol,lidocaina"></div>
+</div>
+
+<!-- TAB 2 -->
+<div id="tab-plr" class="tab-panel" role="tabpanel">
+<h2>Lidocaína - Propofol - Remifentanilo (L-P-R)</h2>
+<p>Modelo dinámico optimizado para analgesia profunda y control autonómico.</p>
+<div class="med-grid">
+<div class="med-card"><h3>Lidocaína</h3>
+<ol class="instrucciones-lista">
+<li><strong>Preparación:</strong>
+    <br> Tomar 6 cc (1% 10mg/cc) y llevarlos a 20 cc (concentración final de <strong>3 mg/cc</strong>).
+    <br> Tomar 3 cc (2% 20mg/cc) y llevarlos a 20 cc (concentración final de <strong>3 mg/cc</strong>).
+</li>
+<li><strong>Tiempo:</strong> Aplicar 1-2 mins rango 2-4 mins, más aceptado 3 minutos antes de instrumentación.</li>
+<li><strong>Dosis:</strong> Administrar <strong>1-1.5mg/kg 7 cc - 10cc ( 21 - 30 mg)</strong> en 1 minuto (velocidad 25mg/min),
+ aplicar mitad de la dosis de Propofol en el minuto siguiente. Y continuar con la segunda dosis de Lidocaína (20-30 mg 1 minuto) se debe administrar fraccionada (Food and Drug Administration, 2026)
+ Terminar con la segunda dosis de Propofol.
+<br>Infusión continua de 2-4 mg/kg/h o sea 1-2 mg minuto (Journal Anestesia 2025 Rinaldi P.)
+<br>Mitad de la dosis: Insuficiencia Hepática o renal GRAVE, > 70 años, Apariencia débil, ASA >2
+<br>NO interaccion farmacodinamica si se usa Remifentanilo, diferentes mecanismos de accion y no competitivos (Digestive Diseases and Sciences 2020).
+</li>
+<li><strong>Manejo de Emergencia:</strong> O2, ventilación bolsa-máscara, si convulsiones dosis baja de propofol, intralipid.</li>
+<li><strong>Prevención de eventos tóxicos:</strong> Dosis menor a dosis máxima acumulada (7 mg/kg aprox 500 mg), fraccionar la administración, usar concentración mínima eficaz, monitorización continua</li>
+</ol></div>
+<div class="med-card"><h3>Propofol</h3>
+<ol class="instrucciones-lista">
+<li><strong>Dosis Inicial:</strong> 0.75 - 1.5 mg/kg (60 kg, administrar dosis de <strong>40 a 90 mg</strong> en 1 minuto).
+<br>INFUSIÓN CONTINUA: 20-50 mcg/kg/min (60 kg: 1.2 - 3 mg/min) incrementos no mayores a 35 mcg/kg/min ( 2 mg/min) y 
+bolos de rescate no mayores a 0.20 mg/kg/min (12 mg) monitorización del nivel de sedación cada 5 mins (Clinical Gastroenterology and Hepatology 2021. Lee HS)
+<br> BOLO INICIAL: menores de 70 años 60-80 mg, 70 a 89 años 40-60 mg, 90 o + solo 20 mg.
+<br>IMC mayor a 35 la depuración y volumen periférico aumentan, SENSIBILIDAD CEREBRAL AUMENTA (el EC50 baja un 38%) (Drug Metabolism and Disposition, 2026. Dong D) luego utilizar 
+IBW (20% mayor que el LBW) para bolo inicial y Masa Magra para mantenimiento.
+luego usar PCM.
+<br>SAHOS
+</li>
+<li><strong>Bolos de refuerzo:</strong> Cada 2-3 minutos administrar <strong>15-20 mg</strong>.</li>
+</ol>
+</div>
+<div class="med-card full"><h3>Remifentanilo</h3>
+<div class="subseccion-titulo">Dilución</div>
+<ol class="instrucciones-lista">
+<li>En 500 cc para una concentración de <strong>4 mcg/cc</strong>. Tomar 10 cc (40 mcg) y llevarlos a 20 cc (2 mcg/cc).</li>
+<li>En 100 cc para una concentración de <strong>20 mcg/cc</strong>. Tomar 2 cc (40 mcg) y llevarlos a 20 cc (2 mcg/cc).
+ Esta se utiliza en bombas de infusión.</li>
+</ol>
+<div class="subseccion-titulo">Dosis</div>
+<ol class="instrucciones-lista">
+<li><strong>Bolo inicial:</strong> 0,125 mcg/kg/min x 2 minutos (60 kg son 15 mcg 7cc) (Surgical Endoscopy 2022, Lin YJ) 
+ 0.2-0.4 mcg/kg en 60 segundos, 12 a 24 mcg (6cc a 12 cc), después de la primera dosis de propofol.</li>
+<li><strong>Mantenimiento y sin necesidad del bolo inicial:</strong> 
+Infusion 2-3 minutos antes de iniciar la endoscopia 0.025-0.1 mcg/kg/min, 1.5 a 6 mcg/min titulado según respuesta hemodinámica y estímulo.</li>
+<li><strong>Mayores de 70 años reducir a la mitad:</strong> 0,025-0,05 mcg/kg/min en 2 minutos (60 kg son 3-6 mcg en 2 mins) (Surgical Endoscopy 2022, Lin YJ)
+  después de la primera dosis de propofol.</li>
+</ol>
+
+<div class="subseccion-titulo">Farmacocinética</div>
+<ol class="instrucciones-lista">
+<li><strong>Farmacocinética</strong> Altamente hidrofílico, usar PCM. No hay efecto de liberación lenta, vida media sensible sigue en 3-5 minutos. metabolismo ultrarrápido por esterasas plasmáticas y tejidos. </li>
+<li><strong>Acción:</strong> </li>
+<li><strong>Ventajas:</strong> abolición reflejo nauseoso y tos, estabilidad hemodinámica, recuperación rápida</li>
+</ol>
+<div class="subseccion-titulo">Adversos</div>
+<ol class="instrucciones-lista">
+<li><strong>Reversor:</strong> Naloxona 0.04 mg a 0.1 mg iv cada 3 minutos </li>
+<li><strong>Rigidez torácica:</strong> Succinilcolina. Intubación</li>
+<li><strong>Ventajas:</strong> abolición reflejo nauseoso y tos, estabilidad hemodinámica, recuperación rápida</li>
+</ol>
+</div>
+</div>
+<div class="calc" data-drugs="propofol,lidocaina,remifentanilo"></div>
+</div>
+
+<!-- TAB 3 -->
+<div id="tab-plk" class="tab-panel" role="tabpanel">
+<h2>Lidocaína - Ketamina - Propofol(L-K-P)</h2>
+<p>Combinación con analgesia disociativa a dosis bajas, que preserva el tono simpático y reduce el requerimiento de propofol.</p>
+<div class="med-grid">
+<div class="med-card"><h3>Lidocaína</h3>
+<ol class="instrucciones-lista">
+<li><strong>Preparación:</strong> Tomar 4 cc y llevarlos a 20 cc (concentración final de <strong>1 mg/cc</strong>).</li>
+<li><strong>Tiempo:</strong> Aplicar unos dos minutos antes de iniciado el procedimiento.</li>
+<li><strong>Dosis:</strong> Administrar <strong>15 mg</strong> en 1 minuto.</li>
+</ol></div>
+<div class="med-card"><h3>Propofol</h3>
+<ol class="instrucciones-lista">
+<li><strong>Dosis Inicial:</strong> 0,4 a 1 mg/kg (para un promedio de 50 kg, dosis de <strong>20 a 50 mg</strong> en 1 minuto), <em>
+después de haber aplicado Lidocaína y ketamina</em>.</li>
+<li><strong>Bolos de refuerzo:</strong> Cada 2-3 minutos administrar <strong>0.1 a 0.5 mg/kg, para 50 kg 5 mg a 25 mg</strong>.</li>
+</ol></div>
+<div class="med-card full"><h3>Ketamina</h3>
+<div class="subseccion-titulo">Dilución</div>
+<ol class="instrucciones-lista">
+<li>Tomar 0,5 cc directamente de la ampolla de 500 mg/10 cc, o sea <strong>25 mg</strong>, y diluirlo en 10 cc para una concentración de <strong>2,5 mg/cc</strong>.</li>
+</ol>
+<div class="subseccion-titulo">Aplicación</div>
+<ol class="instrucciones-lista">
+<li>Aplicar <em>después de Lidocaína y antes de Propofol</em>.</li>
+<li><strong>Dosis:</strong> 0.3- 0.5 mg/kg adulto, <strong>15 a 25 mg</strong> en 1 minuto, o sea <strong>6 cc a 10 cc</strong>
+(American Journal of Health - system Pharmacy 2011, Thomas MC).</li>
+<li>Repetir dosis de <strong>10 a 20 mg</strong> (<strong>4 cc a 8 cc</strong>) después de 10 minutos si es necesario.</li>
+</ol>
+<div class="subseccion-titulo">Farmacocinética</div>
+<ol class="instrucciones-lista">
+<li>Lipofílico, usar PCM. Bolo aislado, la grasa lo atrapa y termina más rápido su efecto. 
+Horas de infusión: al interrumpir el fármaco persiste la acción al volver al torrente sanguíneo.</li>
+<li><strong>Acción:</strong> Antagonista NMDA, desconecta las regiones corticotalámica y límbica. Analgesia, amnesia</li>
+<li><strong> Inicio de acción clínica y duración:</strong> dosis de 1 mg/kg inicio menos de 1 min, con disociación efectiva 5 min x 15 a 30 min, efecto termina al redistribuirse fuera del cerebro en otros tejidos.</li>
+<li><strong>Ventajas:</strong> Preserva ventilación espontánea, estabilidad hemodinámica, sedación profunda, menos eventos adversos, reduccion dosis de Propofol </li>
+<li><strong>Desventajas:</strong> Sialorrea, taquicardia, hipertensión</li>
+<li><strong>Contraindicaciones:</strong> Adulto mayor, paciente con hc de hipertensión o hipertenso en el momento, hc de cardiopatía y/o coronariopatía, falla hepática severa, cirrosis descompensada</li>
+<li><strong>Metabolismo:</strong> Hepático (Falla hepática en dosis única no necesita cambios de dosis), metabolitos hidrosolubles son excretados por vía renal</li>
+<li><strong>Prevención:</strong> Usar bolos únicos, dosis mínima efectiva, evitar infusiones continuas largas, aplicación lenta en +1 min</li>
+<li><strong>Toxicidad, eventos adversos:</strong> CV (HTA, taquicardia, aumento del gasto cardíaco, arritmias), delirium, nistagmus, ataxia, aumento de presión intraocular, espasmos musculares</li>
+</ol>
+</div>
+<div class="med-card full"><h3>Ketofol</h3>
+<ol class="instrucciones-lista">
+<li><strong>Preparación:</strong> Misma jeringa de 20 cc, Proporción 1 mg ketamina:3 mg de propofol en masa, 
+tomar 1 cc de ketamina (50 mg) y 15 cc propofol (150 mg) y 4 cc de solución salina, quedando 2.5 mg de Ketamina y 7.5 mg de Propofol por 1 cc.</li>
+<li><strong>Tiempo:</strong> Aplicar unos dos minutos antes de iniciado el procedimiento.</li>
+<li><strong>Dosis:</strong> 12 a 20 años edad Administrar <strong>0,06 cc/kg </strong> para 60 kg serían 3.6 cc (9 mg Ket y 27 mg Propofol) en 1 minuto.</li>
+<li><strong>Dosis subsiguientes:</strong> <strong>0,03 cc/kg cada 2 -3 min</strong> para 60 kg sería 1.8 cc en 1 minuto o sea 4.5 mg de Ket y 13.5 mg de Propofol .</li>
+<li><strong>Efecto clínico:</strong> Inicio sedación en <strong> 1 min</strong> recuperación en 10-20 mins.</li>
+<li><strong>Otras dosis x edades:</strong> 2-11 años edad Administrar <strong>0,15 cc/kg </strong> 
+para 40 kg serían 6 cc (15 mg Ket y 60 mg Propofol) en 1 minuto. seguida de 2 mins 0,05 cc/kg o sea 2 cc, luego 0,025cc/kg 1 cc cada 2-3 mins </li>
+</ol></div>
+</div>
+<div class="calc" data-drugs="propofol,lidocaina,ketamina"></div>
+</div>
+
+<!-- TAB 4 -->
+<div id="tab-comp" class="tab-panel" role="tabpanel">
+<h2>Complicaciones</h2>
+<p>Pautas de manejo de las complicaciones hemodinámicas más frecuentes durante el procedimiento.</p>
+
+<div class="med-card"><h3>Vía aérea y respiración</h3>
+<ol class="instrucciones-lista">
+<li> Depresión respiratoria aguda - estímulo verbal y táctil, tracción mandibular, SUCCIÓN si hay secreciones, CÁNULAS NASALES DE ALTO FLUJO, retiro del endoscopio, SUPINO, cánula de Guedel, ventilación bolsa-válvula - mascarilla O2 100%. Máscara laríngea</li>
+<li> Movimientos mioclónicos o involuntarios: ajustar profundidad de sedación.</li>
+<li> Broncoespasmo: retirar endoscopio, decúbito supino, Jaw thrust, máscara facial sellada (2 manos), bolsa y O2, 
+<br> CPAP MANUAL: válvula de la bolsa parcialmente cerrada, maniobra de Larson (presión fuerte entre la mastoides y rama ascendente mandibular)
+<br> Espasmo es parcial, dosis adicional de propofol para eliminar los reflejos protectores exagerados de la laringe.</li>
+</ol></div>
+
+<div class="med-card"><h3>1. Bradicardia</h3>
+<ol class="instrucciones-lista" type="a">
+<li><strong>Si FC menor de 50:</strong> aplicar <strong>10 a 20 mg de Hioscina</strong> (si no hay contraindicaciones como glaucoma).</li>
+<li><strong>Si FC menor de 40 y no sube después de la Hioscina:</strong> tomar <strong>atropina 1 mg</strong> y llevarla a 10 cc. Aplicar una primera dosis de <strong>5 cc (0,5 mg)</strong> y, si no hay respuesta, repetir en 1 minuto la misma dosis de <strong>5 cc (0,5 mg)</strong>.</li>
+<li><strong>Retirar la tensión mecánica:</strong> detener el avance del endoscopio o colonoscopio y aspirar para disminuir el aire y el tono vagal.</li>
+</ol></div>
+
+<div class="med-card"><h3>2. Hipotensión</h3>
+<ol class="instrucciones-lista" type="a">
+<li><strong>Definición:</strong> PAM inferior a 65 mmHg.</li>
+<li>No aplicar sedantes-analgésicos hasta restablecer la PA.</li>
+<li><strong>Oxígeno</strong> a no más de 4 L/min, para evitar la disminución del retorno venoso.</li>
+<li>Trendelenburg y elevación de piernas.</li>
+<li>Retiro del aire abdominal.</li>
+<li>Bolo de SSN de <strong>250 cc a 500 cc</strong>.</li>
+<li><strong>Soporte farmacológico</strong> (ver subsecciones).</li>
+</ol>
+
+<div class="subseccion-titulo">Efedrina</div>
+<ol class="instrucciones-lista">
+<li>Agonista alfa y beta; indicada si hay también bradicardia.</li>
+<li><strong>Dosis:</strong> <span class="ref">pendiente de completar</span></li>
+</ol>
+
+<div class="subseccion-titulo">Fenilefrina</div>
+<ol class="instrucciones-lista">
+<li>Alfa 1 puro; indicada si hay taquicardia adicional.</li>
+<li><strong>Dosis:</strong> <span class="ref">pendiente de completar</span></li>
+</ol>
+
+<div class="subseccion-titulo">Etilefrina (Efortil)</div>
+<ol class="instrucciones-lista">
+<li>Alfa y beta; indicada si hay también bradicardia.</li>
+<li><strong>Presentación:</strong> ampolla de 10 mg/cc.</li>
+<li><strong>Dosis:</strong> <span class="ref">pendiente de completar</span></li>
+</ol></div>
+</div>
+
+</div>
+<p class="aviso"><strong>Aviso:</strong> herramienta de apoyo al cálculo. No sustituye el juicio clínico ni la verificación de dosis, concentraciones y bombas de infusión por el profesional responsable. Los valores marcados como "referencia" son rangos generales editables y deben confirmarse con su protocolo institucional.</p>
+</div>
+
+<script>
+var FARMACOS = {
+  propofol:     {nombre:'Propofol',     unidad:'mcg/kg/min', def:100, conc:10, concU:'mg/mL',  min:25,   max:200},
+  lidocaina:    {nombre:'Lidocaína',    unidad:'mg/kg/h',    def:1.5, conc:20, concU:'mg/mL',  min:0.5,  max:3},
+  ketamina:     {nombre:'Ketamina',     unidad:'mg/kg/h',    def:0.2, conc:10, concU:'mg/mL',  min:0.05, max:0.6},
+  remifentanilo:{nombre:'Remifentanilo',unidad:'mcg/kg/min', def:0.1, conc:20, concU:'mcg/mL', min:0.02, max:0.5}
+};
+
+function pesoActual(){
+  var peso = parseFloat(document.getElementById('lbm-peso').value);
+  return (peso > 0) ? peso : null;
+}
+
+function mlPorHora(f, dosis, peso, conc){
+  var porHora;
+  if (f.unidad === 'mcg/kg/min') {
+    porHora = dosis * peso * 60;
+    if (f.concU === 'mg/mL') porHora /= 1000;
+  } else {
+    porHora = dosis * peso;
+  }
+  return porHora / conc;
+}
+
+function construirCalculadoras(){
+  document.querySelectorAll('.calc').forEach(function(box, idx){
+    var html = '<div class="med-card full"><h3>Calculadora de infusión</h3>';
+    box.dataset.drugs.split(',').forEach(function(k){
+      var f = FARMACOS[k], id = idx + '-' + k;
+      html += '<div class="calc-row">' +
+        '<div class="nombre">' + f.nombre + '<small>Rango de referencia: ' + f.min + '-' + f.max + ' ' + f.unidad + '</small></div>' +
+        '<div class="form-group"><label for="d-' + id + '">Dosis (' + f.unidad + ')</label>' +
+        '<input type="number" id="d-' + id + '" value="' + f.def + '" min="0" step="any"></div>' +
+        '<div class="form-group"><label for="c-' + id + '">Concentración (' + f.concU + ')</label>' +
+        '<input type="number" id="c-' + id + '" value="' + f.conc + '" min="0" step="any"></div></div>';
+    });
+    html += '<button type="button" class="btn-calc" data-calc="' + idx + '">Calcular tasas de infusión</button>' +
+            '<div class="results-box" id="res-' + idx + '" aria-live="polite"></div></div>';
+    box.innerHTML = html;
+  });
+}
+
+function calcular(idx){
+  var box = document.querySelectorAll('.calc')[idx];
+  var res = document.getElementById('res-' + idx);
+  var peso = pesoActual();
+  res.style.display = 'block';
+  if (!peso) { res.innerHTML = '<p class="alerta">Ingrese un peso total válido (kg) en la calculadora de PCM (parte superior).</p>'; return; }
+
+  var filas = '', alertas = '';
+  box.dataset.drugs.split(',').forEach(function(k){
+    var f = FARMACOS[k], id = idx + '-' + k;
+    var dosis = parseFloat(document.getElementById('d-' + id).value);
+    var conc  = parseFloat(document.getElementById('c-' + id).value);
+    if (!(dosis >= 0) || !(conc > 0)) {
+      alertas += '<p class="alerta">' + f.nombre + ': revise dosis y concentración (deben ser números válidos).</p>';
+      return;
+    }
+    var ml = mlPorHora(f, dosis, peso, conc);
+    filas += '<tr><td>' + f.nombre + '</td><td>' + dosis + ' ' + f.unidad + '</td><td>' + conc + ' ' + f.concU +
+             '</td><td><strong>' + ml.toFixed(2) + ' mL/h</strong></td></tr>';
+    if (dosis < f.min || dosis > f.max) {
+      alertas += '<p class="alerta">' + f.nombre + ': la dosis ' + dosis + ' ' + f.unidad + ' está fuera del rango de referencia (' + f.min + '-' + f.max + ').</p>';
+    }
+  });
+  res.innerHTML = '<p><strong>Cálculo sobre peso total: ' + peso + ' kg</strong></p>' +
+    '<table><thead><tr><th>Fármaco</th><th>Dosis</th><th>Concentración</th><th>Velocidad</th></tr></thead><tbody>' +
+    filas + '</tbody></table>' + alertas;
+}
+
+function cambiarTab(btn){
+  document.querySelectorAll('.tab-button').forEach(function(b){
+    var activo = (b === btn);
+    b.classList.toggle('active', activo);
+    b.setAttribute('aria-selected', activo);
+  });
+  document.querySelectorAll('.tab-panel').forEach(function(p){
+    p.classList.toggle('active', p.id === btn.dataset.tab);
+  });
+}
+
+function calcularPCM(sexo, peso, tallaCm){
+  var m = tallaCm / 100;
+  var imc = peso / (m * m);
+  var pcm = (sexo === 'M')
+    ? (9270 * peso) / (6680 + 216 * imc)
+    : (9270 * peso) / (8780 + 244 * imc);
+  return {imc: imc, pcm: pcm, pct: pcm / peso * 100};
+}
+
+function ajustarSticky(){
+  var l = document.querySelector('.lbm');
+  document.documentElement.style.setProperty('--lbm-h', l.offsetHeight + 'px');
+}
+
+function actualizarPCM(){
+  var out = document.getElementById('lbm-result');
+  var sexo  = document.getElementById('lbm-sexo').value;
+  var peso  = parseFloat(document.getElementById('lbm-peso').value);
+  var talla = parseFloat(document.getElementById('lbm-talla').value);
+  if (!(peso > 0) || !(talla >= 100 && talla <= 230)) {
+    out.innerHTML = '<p class="lbm-msg">Ingrese un peso válido (kg) y una talla entre 100 y 230 cm.</p>';
+    ajustarSticky();
+    return;
+  }
+  var r = calcularPCM(sexo, peso, talla);
+  out.innerHTML =
+    '<div class="lbm-kpi"><span>PCM (masa magra)</span><strong>' + r.pcm.toFixed(2) + ' kg</strong></div>' +
+    '<div class="lbm-kpi"><span>% del peso total</span><strong>' + r.pct.toFixed(1) + ' %</strong></div>' +
+    '<div class="lbm-kpi"><span>IMC</span><strong>' + r.imc.toFixed(1) + ' kg/m²</strong></div>';
+  ajustarSticky();
+}
+
+document.getElementById('lbm-sexo').addEventListener('change', actualizarPCM);
+document.getElementById('lbm-peso').addEventListener('input', actualizarPCM);
+document.getElementById('lbm-talla').addEventListener('input', actualizarPCM);
+window.addEventListener('resize', ajustarSticky);
+actualizarPCM();
+
+document.querySelectorAll('.tab-button').forEach(function(b){
+  b.addEventListener('click', function(){ cambiarTab(b); });
+});
+construirCalculadoras();
+document.addEventListener('click', function(e){
+  if (e.target.matches('[data-calc]')) calcular(parseInt(e.target.dataset.calc, 10));
+});
+</script>
+</body>
+</html>
