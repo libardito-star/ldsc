@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oxigenoterapia</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#eef5fc; --surface:#ffffff; --ink:#0f2a44; --muted:#4a6783;
+  --primary:#0b5cab; --primary-dark:#083f78; --soft:#dbeafe; --line:#c3d9f0;
+  --head-bg:#0b4f94; --head-ink:#ffffff; --row:#f3f8fe; --alert-bg:#e6f1ff;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0a1a2c; --surface:#102640; --ink:#e4efff; --muted:#9bb6d3;
+    --primary:#5aa7f0; --primary-dark:#8ec4ff; --soft:#16365b; --line:#25476f;
+    --head-bg:#0a3a6e; --head-ink:#ffffff; --row:#132d4b; --alert-bg:#14304f;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0a1a2c; --surface:#102640; --ink:#e4efff; --muted:#9bb6d3;
+  --primary:#5aa7f0; --primary-dark:#8ec4ff; --soft:#16365b; --line:#25476f;
+  --head-bg:#0a3a6e; --head-ink:#ffffff; --row:#132d4b; --alert-bg:#14304f;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.6}
+header{background:linear-gradient(135deg,var(--head-bg),#1673cf);color:var(--head-ink);padding:22px 20px 26px}
+.bar{max-width:920px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+h1{margin:0;font-size:clamp(1.7rem,5vw,2.4rem);font-weight:700;letter-spacing:.2px}
+.sub{margin:4px 0 0;opacity:.85;font-size:.95rem}
+.home{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);padding:8px 14px;border-radius:999px;white-space:nowrap}
+.home:hover,.home:focus-visible{background:rgba(255,255,255,.3);outline:2px solid #fff;outline-offset:2px}
+.home svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+main{max-width:920px;margin:0 auto;padding:20px 16px 40px}
+[role=tablist]{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px}
+[role=tab]{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--primary);font:inherit;font-weight:600;font-size:.92rem;padding:10px 16px;border-radius:10px;cursor:pointer}
+[role=tab]:hover{background:var(--soft)}
+[role=tab][aria-selected=true]{background:var(--primary);border-color:var(--primary);color:#fff}
+[role=tab]:focus-visible{outline:3px solid var(--primary-dark);outline-offset:2px}
+[role=tabpanel]{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 22px;margin-top:8px}
+[role=tabpanel][hidden]{display:none}
+h2{margin:0 0 12px;color:var(--primary-dark);font-size:1.35rem}
+p{margin:0 0 14px;max-width:70ch}
+.note{background:var(--alert-bg);border-left:4px solid var(--primary);padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0}
+.scroll{overflow-x:auto;margin-top:12px}
+table{width:100%;border-collapse:collapse;min-width:420px}
+th{background:var(--head-bg);color:#fff;text-align:left;padding:11px 14px;font-weight:600;font-size:.92rem}
+td{padding:11px 14px;border-bottom:1px solid var(--line)}
+tbody tr:nth-child(even){background:var(--row)}
+td:last-child{font-weight:600;color:var(--primary-dark)}
+ul{padding-left:0;list-style:none;margin:0 0 6px}
+li{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+li:nth-child(even){background:var(--row)}
+li b{color:var(--primary-dark)}
+.swatch{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:middle;border:1px solid rgba(0,0,0,.25)}
+@media (max-width:520px){.bar{flex-direction:column-reverse;align-items:flex-end}.bar>div{align-self:flex-start}}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div>
+      <h1>Oxigenoterapia</h1>
+      <p class="sub">Dispositivos de administración de oxígeno y FiO₂ aproximada</p>
+    </div>
+    <a class="home" href="index.html" id="home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+      Volver Página Principal
+    </a>
+  </div>
+</header>
+
+<main>
+  <div role="tablist" aria-label="Dispositivos de oxigenoterapia">
+    <button role="tab" id="t1" aria-controls="p1" aria-selected="true">1. Cánula nasal</button>
+    <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">2. Mascarilla simple</button>
+    <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">3. Mascarilla Venturi</button>
+    <button role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">4. Con reservorio</button>
+    <button role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1">5. Ambú (BVM)</button>
+  </div>
+
+  <section role="tabpanel" id="p1" aria-labelledby="t1">
+    <h2>1. Cánula nasal (bajo flujo)</h2>
+    <p>Aumenta la FiO₂ aproximadamente en un 3% a 4% por cada litro por minuto adicional sobre el 21% del aire ambiente.</p>
+    <div class="note">No se recomienda superar los 6 L/min porque seca la mucosa nasal y no incrementa significativamente la oxigenación.</div>
+    <div class="scroll"><table>
+      <thead><tr><th>Flujo de O₂</th><th>FiO₂ aproximada</th></tr></thead>
+      <tbody>
+        <tr><td>1 L/min</td><td>24%</td></tr>
+        <tr><td>2 L/min</td><td>28%</td></tr>
+        <tr><td>3 L/min</td><td>32%</td></tr>
+        <tr><td>4 L/min</td><td>36%</td></tr>
+        <tr><td>5 L/min</td><td>40%</td></tr>
+        <tr><td>6 L/min</td><td>44%</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+    <h2>2. Mascarilla facial simple</h2>
+    <ul>
+      <li><span><b>5 L/min</b> (límite inferior recomendado)</span><span>~ 40% de FiO₂</span></li>
+      <li><span><b>6 a 7 L/min</b></span><span>~ 45% - 50% de FiO₂</span></li>
+      <li><span><b>8 L/min</b></span><span>~ 50% - 53% de FiO₂</span></li>
+      <li><span><b>9 a 10 L/min</b> (máximo recomendado)</span><span>~ 55% - 60% de FiO₂</span></li>
+    </ul>
+    <div class="note">Menos de 5 L/min conlleva riesgo de reinhalación de CO₂.</div>
+  </section>
+
+  <section role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+    <h2>3. Mascarilla Venturi (alto flujo)</h2>
+    <p>Cada adaptador de color exige ajustar el flujómetro a los L/min exactos indicados por el fabricante para generar el efecto Venturi y mantener constante la FiO₂.</p>
+    <div class="note">Los flujos pueden presentar ligeras variaciones según la marca del dispositivo.</div>
+    <div class="scroll"><table>
+      <thead><tr><th>Color del adaptador</th><th>Flujo mínimo de O₂ requerido</th><th>FiO₂ fija entregada</th></tr></thead>
+      <tbody>
+        <tr><td><span class="swatch" style="background:#1e6fd9"></span>Azul</td><td>2 - 3 L/min</td><td>24%</td></tr>
+        <tr><td><span class="swatch" style="background:#fff"></span>Blanco</td><td>4 - 6 L/min</td><td>28%</td></tr>
+        <tr><td><span class="swatch" style="background:#f58a1f"></span>Naranja</td><td>6 - 8 L/min</td><td>31%</td></tr>
+        <tr><td><span class="swatch" style="background:#f6d200"></span>Amarillo</td><td>8 - 10 L/min</td><td>35%</td></tr>
+        <tr><td><span class="swatch" style="background:#d62828"></span>Rojo</td><td>10 - 12 L/min</td><td>40%</td></tr>
+        <tr><td><span class="swatch" style="background:#2e9e4f"></span>Verde</td><td>12 - 15 L/min</td><td>50% - 60%</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+    <h2>4. Mascarilla con reservorio (bajo flujo)</h2>
+    <p>Requiere flujos altos desde el inicio (mínimo 6 a 10 L/min según el diseño) para mantener la bolsa reservorio siempre inflada y evitar la reinhalación de dióxido de carbono.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Tipo de mascarilla</th><th>Flujo de O₂</th><th>FiO₂ aproximada</th></tr></thead>
+      <tbody>
+        <tr><td>Reinhalación parcial (sin válvulas unidireccionales)</td><td>6 a 10 L/min</td><td>60% - 80%</td></tr>
+        <tr><td>No reinhalación (con válvulas unidireccionales)</td><td>10 a 15 L/min</td><td>80% - 95%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">En la mascarilla de no reinhalación se alcanza hasta ~100% con sello hermético a DOS MANOS.</div>
+  </section>
+
+  <section role="tabpanel" id="p5" aria-labelledby="t5" hidden>
+    <h2>5. Ambú (dispositivo bolsa-válvula-mascarilla o BVM)</h2>
+    <p>Entrega una FiO₂ de 90% a 100% cuando se conecta a una fuente de oxígeno a 15 L/min y tiene acoplada su bolsa reservorio.</p>
+    <p>Para llenar la bolsa reservorio, abrir el flujo a 10 - 15 litros por minuto (L/min) antes de iniciar las ventilaciones. Con este caudal, la bolsa se inflará por sí sola en pocos segundos para aportar concentraciones de oxígeno cercanas al 90% - 100%.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Dispositivo</th><th>Configuración / Flujo O₂</th><th>FiO₂ entregada</th></tr></thead>
+      <tbody>
+        <tr><td>Ambú (sin oxígeno extra)</td><td>Ventilando solo con aire ambiente (0 L/min)</td><td>21%</td></tr>
+        <tr><td>Ambú (con oxígeno, sin bolsa)</td><td>Conectado a 15 L/min sin bolsa reservorio</td><td>40% – 60%</td></tr>
+        <tr><td>Ambú (con oxígeno y bolsa)</td><td>Conectado a 15 L/min con bolsa reservorio</td><td>90% – 100%</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function show(t,focus){
+    tabs.forEach(function(x){
+      var on=x===t;
+      x.setAttribute('aria-selected',on);
+      x.tabIndex=on?0:-1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+    });
+    if(focus)t.focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(t)});
+    t.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight')n=tabs[(i+1)%tabs.length];
+      if(e.key==='ArrowLeft')n=tabs[(i-1+tabs.length)%tabs.length];
+      if(n){e.preventDefault();show(n,true)}
+    });
+  });
+})();
+</script>
+</body>
+</html>
