@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protocolo de sedación interactiva con propofol y remifentanilo + CNAF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b3a63; --blue:#1565a8; --blue-mid:#2f8fd8; --sky:#e6f1fb; --mist:#f4f8fc;
+  --line:#cfdeed; --ink:#17283a; --muted:#52677d; --alert-bg:#fff4e5; --alert:#a85a00; --danger-bg:#fdecec; --danger:#a12622;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Source Sans 3",system-ui,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);background:var(--mist)}
+header{background:var(--navy);color:#fff;padding:22px 20px 0}
+.top{max-width:1000px;margin:0 auto;display:flex;gap:16px;align-items:flex-start;justify-content:space-between}
+.top h1{font-size:1.2rem;line-height:1.35;margin:0;font-weight:700;max-width:720px}
+.top small{display:block;font-weight:400;opacity:.8;margin-top:4px;font-size:.9rem}
+.home{flex:none;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);text-decoration:none;font-weight:600;font-size:.95rem;padding:9px 14px;border-radius:8px;border:2px solid transparent}
+.home:hover{background:var(--sky)}
+.home:focus-visible,.tab:focus-visible{outline:3px solid var(--blue-mid);outline-offset:2px}
+.home svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+nav{max-width:1000px;margin:18px auto 0}
+[role=tablist]{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin}
+.tab{flex:none;font:inherit;font-weight:600;font-size:.95rem;color:#cfe3f6;background:transparent;border:0;padding:11px 16px;border-radius:8px 8px 0 0;cursor:pointer;white-space:nowrap}
+.tab:hover{background:rgba(255,255,255,.12);color:#fff}
+.tab[aria-selected=true]{background:var(--mist);color:var(--navy)}
+main{max-width:1000px;margin:0 auto;padding:28px 20px 60px}
+.panel[hidden]{display:none}
+h2{color:var(--navy);font-size:1.5rem;margin:0 0 16px;line-height:1.25}
+h3{color:var(--blue);font-size:1.12rem;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:75ch}
+ul,ol{margin:0 0 16px;padding-left:22px;max-width:75ch}
+li{margin-bottom:6px}
+.note{background:var(--sky);border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 8px 8px 0;max-width:75ch;margin:0 0 16px}
+.warn{background:var(--alert-bg);border-left-color:var(--alert)}
+.danger{background:var(--danger-bg);border-left-color:var(--danger)}
+.wrap{overflow-x:auto;margin-bottom:16px}
+table{border-collapse:collapse;width:100%;min-width:560px;background:#fff}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--blue);color:#fff;font-weight:600}
+td:first-child{font-weight:600;color:var(--navy)}
+.phase{background:#fff;border:1px solid var(--line);border-radius:10px;padding:4px 20px 8px;margin-bottom:16px}
+.phase h3{margin-top:16px}
+.cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--blue-mid);border-radius:10px;padding:14px 18px}
+.card.d{border-top-color:var(--danger)}
+.card h3{margin-top:4px}
+footer{max-width:1000px;margin:0 auto;padding:0 20px 30px;color:var(--muted);font-size:.85rem}
+@media(max-width:600px){.home span{display:none}.home{padding:10px}body{font-size:16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <h1>Protocolo clínico: sedación interactiva con propofol y remifentanilo apoyada por CNAF
+      <small>Endoscopia y colonoscopia digestiva ambulatoria · Pacientes ASA I y II</small></h1>
+    <a class="home" href="index.html" aria-label="Volver Página Principal">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+      <span>Volver Página Principal</span>
+    </a>
+  </div>
+  <nav aria-label="Secciones del protocolo">
+    <div role="tablist" aria-label="Numerales del protocolo">
+      <button class="tab" role="tab" id="t1" aria-controls="p1">1. Introducción</button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2">2. Criterios</button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3">3. Materiales</button>
+      <button class="tab" role="tab" id="t4" aria-controls="p4">4. Fármacos</button>
+      <button class="tab" role="tab" id="t5" aria-controls="p5">5. Procedimiento</button>
+      <button class="tab" role="tab" id="t6" aria-controls="p6">6. Crisis respiratorias</button>
+      <button class="tab" role="tab" id="t7" aria-controls="p7">7. Egreso</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+<section class="panel" id="p1" role="tabpanel" aria-labelledby="t1" tabindex="0">
+  <h2>1. Introducción y justificación clínica</h2>
+  <p>La realización de endoscopias digestivas diagnósticas breves genera un potente estímulo simpático y reflejo en la faringe del paciente. La combinación de propofol (hipnótico) y remifentanilo (analgésico de acción ultracorta), administrados mediante infusiones continuas (bolo inicial único), permite alcanzar una sedación interactiva (moderada), donde el paciente permanece confortable, colabora con el examinador y preserva su respiración espontánea.</p>
+  <p>La incorporación de la Cánula Nasal de Alto Flujo (CNAF) en este esquema actúa como un pilar fundamental de seguridad. Al proveer gas acondicionado y una columna constante de oxígeno a altos flujos, genera una reserva pulmonar (oxigenación apneica) y una leve presión positiva que mantiene la vía aérea superior permeable, mitigando de forma drástica el riesgo de hipoxemia ante episodios transitorios de hipoventilación o apnea obstructiva inducidos por la sinergia de los sedantes.</p>
+  <div class="note"><strong>Sin CNAF disponible:</strong> utilizar cánula nasal a 3 L/min (FiO₂ 32 %) o a 6 L/min (FiO₂ 44 %).</div>
+</section>
+
+<section class="panel" id="p2" role="tabpanel" aria-labelledby="t2" tabindex="0" hidden>
+  <h2>2. Criterios de inclusión y exclusión</h2>
+  <h3>2.1 Criterios de inclusión</h3>
+  <ul>
+    <li>Pacientes programados para endoscopia digestiva alta o colonoscopia diagnóstica o terapéutica breve (duración estimada: 5-15 minutos).</li>
+    <li>Clasificación del estado físico: ASA I (paciente sano) y ASA II (enfermedad sistémica leve y controlada, sin limitación funcional).</li>
+    <li>Edades comprendidas entre 18 y 65 años.</li>
+  </ul>
+  <h3>2.2 Criterios de exclusión (contraindicaciones absolutas)</h3>
+  <ul>
+    <li><strong>Hipersensibilidad conocida:</strong> antecedentes de reacción anafiláctica al propofol, al remifentanilo o a componentes del vehículo (huevo, lecitina de soya).</li>
+    <li><strong>Predictores de vía aérea difícil (VAD):</strong> Mallampati IV, distancia tiromentoniana &lt; 6 cm, micrognatia o limitación severa de la apertura bucal.</li>
+    <li><strong>Estómago lleno o vaciamiento gástrico retrasado:</strong> sospecha de retención gástrica, estenosis pilórica, gastroparesia diabética grave o hemorragia de vías digestivas altas activa (requieren protección de la vía aérea mediante intubación endotraqueal).</li>
+    <li><strong>Inestabilidad hemodinámica basal:</strong> hipotensión arterial severa o shock.</li>
+  </ul>
+  <h3>2.3 Criterios de exclusión relativos</h3>
+  <ul>
+    <li>Sospecha de apnea obstructiva del sueño (AOS) moderada o grave (puntuación alta en STOP-BANG).</li>
+    <li>Consumo crónico de opioides o tolerancia severa a benzodiacepinas (perfil farmacodinámico impredecible).</li>
+  </ul>
+</section>
+
+<section class="panel" id="p3" role="tabpanel" aria-labelledby="t3" tabindex="0" hidden>
+  <h2>3. Materiales y equipamiento requerido</h2>
+  <div class="cards">
+    <div class="card"><h3>3.1 Sistema de alto flujo</h3>
+      <ul>
+        <li>Consola generadora de alto flujo (tipo Airvo 2 o módulo acoplado a ventilador mecánico).</li>
+        <li>Humidificador térmico acoplado con cámara de llenado automático.</li>
+        <li>Bolsa de agua estéril para inhalación.</li>
+        <li>Circuito/tubo de una sola vía calefaccionado.</li>
+        <li>Interfaces nasales (cánulas de alto flujo) de tamaños adecuados (S, M, L).</li>
+        <li><em>Alternativa:</em> cánula nasal hasta 6 L/min.</li>
+      </ul></div>
+    <div class="card"><h3>3.2 Infusión y monitoreo</h3>
+      <ul>
+        <li>Dos (2) bombas de infusión convencionales (volumétricas o de jeringa), programables de forma independiente; o bolo único de remifentanilo y bolos a necesidad de propofol.</li>
+        <li>Monitor de signos vitales con oximetría de pulso (SpO₂), ECG continuo y presión arterial no invasiva (PANI) cada 3 minutos.</li>
+      </ul></div>
+    <div class="card"><h3>3.3 Respaldo de vía aérea y emergencia</h3>
+      <ul>
+        <li>Máscara simple 5-8 L/min: FiO₂ 40 a 60 %.</li>
+        <li>Máscara Venturi: verde 35 % – 8 LPM; rosada 40 % – 8 LPM; naranja 50 % – 12 LPM.</li>
+        <li>Bolsa de reanimación autoinflable (Ambu) conectada a toma de O₂ independiente: FiO₂ 60 a 90 % usando 10-15 L/min.</li>
+        <li>Máscaras laríngeas y cánulas faríngeas de Guedel.</li>
+        <li>Equipo de intubación endotraqueal completo, por seguridad.</li>
+      </ul></div>
+  </div>
+</section>
+
+<section class="panel" id="p4" role="tabpanel" aria-labelledby="t4" tabindex="0" hidden>
+  <h2>4. Preparación y dilución de fármacos</h2>
+  <div class="wrap">
+  <table>
+    <thead><tr><th>Fármaco</th><th>Concentración de fábrica</th><th>Preparación / dilución</th><th>Concentración final de trabajo</th></tr></thead>
+    <tbody>
+      <tr><td>Propofol 1 %</td><td>Ampolla/vial de 10 mg/mL en 20 mL o 50 mL</td><td>Sin diluir. Se extrae el contenido directamente en la jeringa o se purga el frasco.</td><td>10 mg/mL</td></tr>
+      <tr><td>Remifentanilo</td><td>Vial de polvo liofilizado de 2 mg</td><td><ol><li>Reconstituir el polvo liofilizado.</li><li>Diluir en un volumen total de 100 mL de solución salina normal (SSN 0.9 %) o dextrosa al 5 %.</li></ol></td><td>20 µg/mL</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="panel" id="p5" role="tabpanel" aria-labelledby="t5" tabindex="0" hidden>
+  <h2>5. Procedimiento clínico paso a paso</h2>
+
+  <div class="phase"><h3>Fase 1: Preparación y configuración del paciente</h3>
+  <ol>
+    <li><strong>Diligenciar la lista de verificación:</strong> confirmar ayuno, accesos venosos permeables (idealmente calibre 20G o 18G) y consentimientos.</li>
+    <li><strong>Encendido de la CNAF:</strong> conectar a fuentes fijas. Iniciar precalentamiento a 37 °C. Flujo inicial: 40-50 L/min. FiO₂: 100 %. O cánula nasal conectada a fuente de oxígeno a 3-6 L/min.</li>
+    <li><strong>Preoxigenación:</strong> permitir que el paciente respire con el sistema durante 3 a 5 minutos previos a la inducción.</li>
+  </ol></div>
+
+  <div class="phase"><h3>Fase 2: Inducción e inicio de infusiones</h3>
+  <ol>
+    <li><strong>Colocación del abrebocas:</strong> colocar con cuidado e instruir al paciente a mantener la boca cerrada inicialmente.</li>
+    <li><strong>Inicio de remifentanilo:</strong>
+      <ul>
+        <li><em>Primera elección:</em> iniciar bomba a dosis continua entre 0.05 y 0.08 µg/kg/min, unos 2 a 3 minutos antes de pasar el endoscopio/colonoscopio.</li>
+        <li><em>Segunda elección:</em> bolo único en 2 min de 0,125 mcg/kg/min x 2 minutos (utilizar peso corporal magro).</li>
+      </ul></li>
+    <li><strong>Inicio de propofol:</strong>
+      <ul>
+        <li><em>Primera elección:</em> dosis de inducción lenta de 0.5 a 1.0 mg/kg fraccionada a lo largo de un minuto completo.</li>
+        <li><em>Segunda elección:</em> bolo de propofol 0,5-2 mg/kg en 1 minuto, en 2 dosis fraccionadas separadas por 1 minuto.</li>
+      </ul>
+      Buscar plano de sedación interactiva (el paciente responde a órdenes verbales simples).</li>
+    <li><strong>Ajuste de mantenimiento:</strong>
+      <ul>
+        <li><em>Primera elección:</em> mantenimiento continuo de propofol a 1.5-3.5 mg/kg/h.</li>
+        <li><em>Segunda elección:</em> bolos de propofol cada 2-3 min de 0,25-0,30 g/kg de peso.</li>
+      </ul></li>
+  </ol></div>
+
+  <div class="phase"><h3>Fase 3: Mantenimiento y progresión endoscópica/colonoscópica</h3>
+  <ol>
+    <li><strong>Introducción del dispositivo:</strong> al franquear el esfínter esofágico superior, si el paciente presenta amago de tos, administrar un microbolo controlado de propofol (10-20 mg IV).</li>
+    <li><strong>Titulación a la baja:</strong> dentro de la cavidad gástrica, reducir la velocidad de la bomba de propofol a la mitad de la tasa inicial de mantenimiento y ajustar la FiO₂ al 40-60 % si la SpO₂ se conserva estable.</li>
+  </ol></div>
+
+  <div class="phase"><h3>Fase 4: Finalización y desconexión</h3>
+  <ol>
+    <li><strong>Apagado preventivo:</strong> al iniciar la retirada del equipo desde el antro gástrico, apagar por completo ambas bombas de infusión.</li>
+    <li><strong>Transición:</strong> retirar la interfaz de CNAF una vez el paciente se encuentre despierto y alerta.</li>
+  </ol></div>
+</section>
+
+<section class="panel" id="p6" role="tabpanel" aria-labelledby="t6" tabindex="0" hidden>
+  <h2>6. Guía de roles y comunicación ante crisis respiratorias</h2>
+  <div class="cards">
+    <div class="card"><h3>Escenario A: apnea o hipoventilación transitoria</h3>
+      <p><strong>SpO₂ &gt; 92 % sostenida por la CNAF.</strong></p>
+      <p>El líder aplica estímulo verbal fuerte y táctil. Realiza maniobra física de subluxación mandibular inmediata. Enfermería disminuye temporalmente la tasa en la bomba de propofol.</p></div>
+    <div class="card d"><h3>Escenario B: apnea prolongada con desaturación</h3>
+      <p><strong>SpO₂ &lt; 90 %.</strong></p>
+      <p>El líder ordena en voz alta suspender bombas y retirar endoscopio. Enfermería apaga los interruptores físicos y alista O₂ a presión positiva. El endoscopista retira el equipo liberando la vía aérea. El líder inicia ventilación con Ambu a FiO₂ 100 %.</p>
+      <div class="note danger">Si persiste la apnea, administrar <strong>naloxona 0.04 mg – 0.1 mg IV</strong> de forma titulada.</div></div>
+  </div>
+</section>
+
+<section class="panel" id="p7" role="tabpanel" aria-labelledby="t7" tabindex="0" hidden>
+  <h2>7. Criterios de egreso (escala de Aldrete modificada)</h2>
+  <p>El paciente podrá ser dado de alta hacia su hogar únicamente cuando cumpla con un puntaje total igual o mayor a 9 puntos en la evaluación clínica estandarizada, que puntúa de 0 a 2 cada uno de los siguientes parámetros:</p>
+  <ul>
+    <li>Actividad motora</li><li>Respiración</li><li>Circulación</li><li>Consciencia</li><li>Saturación de oxígeno</li>
+  </ul>
+  <div class="note warn"><strong>Puntaje mínimo para el alta: 9 puntos.</strong></div>
+</section>
+</main>
+
+<footer>Documento de apoyo clínico. Su uso corresponde a personal capacitado según el protocolo institucional.</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function show(i,focus){
+    tabs.forEach(function(t,k){
+      var on=k===i;
+      t.setAttribute('aria-selected',on);
+      t.tabIndex=on?0:-1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+    if(focus)tabs[i].focus();
+    tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});
+    try{history.replaceState(null,'','#'+tabs[i].getAttribute('aria-controls'))}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(i)});
+    t.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight')n=(i+1)%tabs.length;
+      if(e.key==='ArrowLeft')n=(i-1+tabs.length)%tabs.length;
+      if(e.key==='Home')n=0;
+      if(e.key==='End')n=tabs.length-1;
+      if(n!==null){e.preventDefault();show(n,true)}
+    });
+  });
+  var start=tabs.findIndex(function(t){return '#'+t.getAttribute('aria-controls')===location.hash});
+  show(start>=0?start:0);
+})();
+</script>
+</body>
+</html>
