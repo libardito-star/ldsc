@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manejo del laringoespasmo en sedación procedural</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#eef5fc; --surface:#ffffff; --ink:#0f2a44; --muted:#4a6783;
+  --primary:#0b5cab; --primary-dark:#083f78; --soft:#dbeafe; --line:#c3d9f0;
+  --head-bg:#0b4f94; --alert-bg:#e6f1ff; --warn-bg:#fff4d6; --warn-line:#c98a00;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0a1a2c; --surface:#102640; --ink:#e4efff; --muted:#9bb6d3;
+    --primary:#5aa7f0; --primary-dark:#8ec4ff; --soft:#16365b; --line:#25476f;
+    --head-bg:#0a3a6e; --alert-bg:#14304f; --warn-bg:#3a2f12; --warn-line:#e0a92a;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0a1a2c; --surface:#102640; --ink:#e4efff; --muted:#9bb6d3;
+  --primary:#5aa7f0; --primary-dark:#8ec4ff; --soft:#16365b; --line:#25476f;
+  --head-bg:#0a3a6e; --alert-bg:#14304f; --warn-bg:#3a2f12; --warn-line:#e0a92a;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.6}
+header{background:linear-gradient(135deg,var(--head-bg),#1673cf);color:#fff;padding:22px 20px 26px}
+.bar{max-width:920px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+h1{margin:0;font-size:clamp(1.5rem,4.6vw,2.2rem);font-weight:700}
+.sub{margin:4px 0 0;opacity:.85;font-size:.95rem}
+.home{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);padding:8px 14px;border-radius:999px;white-space:nowrap}
+.home:hover,.home:focus-visible{background:rgba(255,255,255,.3);outline:2px solid #fff;outline-offset:2px}
+.home svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+main{max-width:920px;margin:0 auto;padding:20px 16px 40px}
+.intro{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--primary);border-radius:12px;padding:16px 20px;margin-bottom:18px}
+.intro p{margin:0}
+[role=tablist]{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px}
+[role=tab]{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--primary);font:inherit;font-weight:600;font-size:.92rem;padding:10px 16px;border-radius:10px;cursor:pointer}
+[role=tab]:hover{background:var(--soft)}
+[role=tab][aria-selected=true]{background:var(--primary);border-color:var(--primary);color:#fff}
+[role=tab]:focus-visible{outline:3px solid var(--primary-dark);outline-offset:2px}
+[role=tabpanel]{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 22px;margin-top:8px}
+[role=tabpanel][hidden]{display:none}
+h2{margin:0 0 12px;color:var(--primary-dark);font-size:1.3rem}
+p{margin:0 0 14px;max-width:70ch}
+ul{margin:0 0 14px;padding-left:22px;max-width:70ch}
+li{margin-bottom:8px}
+.note{background:var(--alert-bg);border-left:4px solid var(--primary);padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0}
+.warn{background:var(--warn-bg);border-left:4px solid var(--warn-line);padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0}
+sup{color:var(--primary);font-weight:600;font-size:.72em}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.nav button{border:1px solid var(--primary);background:transparent;color:var(--primary);font:inherit;font-weight:600;padding:8px 16px;border-radius:10px;cursor:pointer}
+.nav button:hover{background:var(--soft)}
+.nav button:disabled{opacity:.35;cursor:default;background:transparent}
+.nav button:focus-visible{outline:3px solid var(--primary-dark);outline-offset:2px}
+@media (max-width:520px){.bar{flex-direction:column-reverse;align-items:flex-end}.bar>div{align-self:flex-start}}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div>
+      <h1>Manejo del laringoespasmo en sedación procedural</h1>
+      <p class="sub">Manejo escalonado de la obstrucción de la vía aérea</p>
+    </div>
+    <a class="home" href="index.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+      Volver Página Principal
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="intro">
+    <p>El algoritmo más directamente aplicable al manejo escalonado de la obstrucción de la vía aérea y el laringospasmo durante sedación procedural es el publicado por la American Academy of Pediatrics, que ilustra la secuencia progresiva de maniobras desde las más simples (reposicionamiento, elevación mandibular) hasta las más invasivas (dispositivo supraglótico, intubación traqueal), aplicable también a adultos sedados.<sup>[1]</sup></p>
+  </div>
+
+  <div role="tablist" aria-label="Pasos del manejo del laringoespasmo">
+    <button role="tab" id="t1" aria-controls="p1" aria-selected="true">1. Eliminar estímulo</button>
+    <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">2. Vía aérea básica</button>
+    <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">3. Profundizar sedación</button>
+    <button role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">4. Relajante muscular</button>
+    <button role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1">5. Presión positiva</button>
+    <button role="tab" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1">6. Intubación</button>
+  </div>
+
+  <section role="tabpanel" id="p1" aria-labelledby="t1">
+    <h2>1. Eliminar el estímulo desencadenante</h2>
+    <p>Retirar la instrumentación y aspirar secreciones o sangre de la orofaringe, con precaución de no provocar más reflejo.<sup>[2][3][4]</sup></p>
+  </section>
+
+  <section role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+    <h2>2. Maniobras básicas de vía aérea</h2>
+    <ul>
+      <li>Presión positiva continua (CPAP) con máscara facial y oxígeno al 100%.</li>
+      <li>Elevación mandibular (jaw-thrust).</li>
+      <li>Presión en la «muesca del laringoespasmo»: posterior a la rama mandibular, anterior a la apófisis mastoides y medial al lóbulo de la oreja.</li>
+    </ul>
+    <div class="note">Se combina con tracción mandibular anterior: es la <b>maniobra de Larson</b>.<sup>[5][6][4][7]</sup></div>
+  </section>
+
+  <section role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+    <h2>3. Profundizar la sedación/anestesia</h2>
+    <p>Propofol IV 0.25–0.8 mg/kg (hasta 1–3 mg/kg según la fuente) suele resolver el espasmo en hasta el 77% de los casos.</p>
+    <p>Se prefiere antes que el relajante muscular cuando hay acceso IV, por su rapidez y perfil cardiovascular más seguro. Si no hay vía IV, puede usarse anestésico inhalatorio.<sup>[5][4]</sup></p>
+  </section>
+
+  <section role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+    <h2>4. Relajante muscular si progresa a hipoxemia</h2>
+    <p>Se indica relajante muscular si el laringoespasmo progresa a hipoxemia (SpO₂ menor de 85%) o hay falta de movimiento de aire.<sup>[5][6][8][4]</sup></p>
+    <ul>
+      <li><b>Succinilcolina IV:</b> 0.1–3 mg/kg (las dosis bajas de 0.1 mg/kg suelen ser efectivas en adultos).</li>
+      <li><b>Sin acceso IV:</b> succinilcolina IM 4–5 mg/kg, considerando coadministrar atropina/glicopirrolato para prevenir la bradicardia inducida por succinilcolina.</li>
+      <li><b>Si la succinilcolina está contraindicada</b> (hiperkalemia, distrofia muscular, quemaduras recientes, sección medular): rocuronio IV 0.3 mg/kg, revertible con sugammadex.</li>
+    </ul>
+  </section>
+
+  <section role="tabpanel" id="p5" aria-labelledby="t5" hidden>
+    <h2>5. Ventilación con presión positiva</h2>
+    <p>Ventilar con presión positiva al 100% de oxígeno una vez lograda la relajación, hasta restablecer una respiración espontánea adecuada.<sup>[5][6]</sup></p>
+  </section>
+
+  <section role="tabpanel" id="p6" aria-labelledby="t6" hidden>
+    <h2>6. Intubación traqueal</h2>
+    <p>Indicada si la obstrucción persiste pese al relajante muscular, o si se requiere asegurar la vía aérea de forma definitiva.</p>
+  </section>
+
+  <div class="nav">
+    <button id="prev">‹ Anterior</button>
+    <button id="next">Siguiente ›</button>
+  </div>
+</main>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  var prev=document.getElementById('prev'),next=document.getElementById('next');
+  var cur=0;
+  function show(i,focus){
+    cur=i;
+    tabs.forEach(function(x,j){
+      var on=j===i;
+      x.setAttribute('aria-selected',on);
+      x.tabIndex=on?0:-1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+    });
+    prev.disabled=i===0;next.disabled=i===tabs.length-1;
+    tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});
+    if(focus)tabs[i].focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(i)});
+    t.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){e.preventDefault();show((i+1)%tabs.length,true)}
+      if(e.key==='ArrowLeft'){e.preventDefault();show((i-1+tabs.length)%tabs.length,true)}
+    });
+  });
+  prev.addEventListener('click',function(){if(cur>0)show(cur-1)});
+  next.addEventListener('click',function(){if(cur<tabs.length-1)show(cur+1)});
+  show(0);
+})();
+</script>
+</body>
+</html>
