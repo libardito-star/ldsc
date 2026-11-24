@@ -33,51 +33,73 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.6}
 header{background:linear-gradient(135deg,var(--head-bg),#1673cf);color:#fff;padding:22px 20px 26px}
 .bar{max-width:920px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-h1{margin:0;font-size:clamp(1.5rem,4.6vw,2.2rem);font-weight:700}
-.sub{margin:4px 0 0;opacity:.85;font-size:.95rem}
+.bar p{margin:0 0 4px;opacity:.85;font-size:.95rem}
+h1{margin:0;font-size:clamp(1.4rem,4.4vw,2.1rem);font-weight:700;line-height:1.2}
 .home{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);padding:8px 14px;border-radius:999px;white-space:nowrap}
 .home:hover,.home:focus-visible{background:rgba(255,255,255,.3);outline:2px solid #fff;outline-offset:2px}
 .home svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 main{max-width:920px;margin:0 auto;padding:20px 16px 40px}
-.intro{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--primary);border-radius:12px;padding:16px 20px;margin-bottom:18px}
-.intro p{margin:0}
-[role=tablist]{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px}
-[role=tab]{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--primary);font:inherit;font-weight:600;font-size:.92rem;padding:10px 16px;border-radius:10px;cursor:pointer}
-[role=tab]:hover{background:var(--soft)}
-[role=tab][aria-selected=true]{background:var(--primary);border-color:var(--primary);color:#fff}
-[role=tab]:focus-visible{outline:3px solid var(--primary-dark);outline-offset:2px}
-[role=tabpanel]{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 22px;margin-top:8px}
+.progress{margin-bottom:12px}
+.progress small{color:var(--muted);font-weight:600}
+.track{height:8px;background:var(--soft);border-radius:99px;overflow:hidden;margin-top:6px}
+.fill{height:100%;width:0;background:var(--primary);border-radius:99px;transition:width .25s}
+[role=tabpanel]{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 22px}
 [role=tabpanel][hidden]{display:none}
-h2{margin:0 0 12px;color:var(--primary-dark);font-size:1.3rem}
+h2{display:flex;gap:12px;align-items:center;margin:0 0 14px;color:var(--primary-dark);font-size:1.3rem;line-height:1.3}
+h2 i{flex:none;width:34px;height:34px;border-radius:10px;background:var(--primary);color:var(--surface);display:grid;place-items:center;font-style:normal;font-size:.95rem;font-weight:700}
 p{margin:0 0 14px;max-width:70ch}
 ul{margin:0 0 14px;padding-left:22px;max-width:70ch}
 li{margin-bottom:8px}
+.ph{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 20px}
+.field{display:flex;flex-direction:column;gap:2px;border-bottom:1.5px solid var(--line);padding-bottom:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field b{font-size:.82rem;color:var(--muted);font-weight:600}
+.field span{overflow-wrap:anywhere}
+.chip{background:var(--soft);color:var(--primary-dark);border-radius:10px;padding:10px 14px;font-weight:600}
 .note{background:var(--alert-bg);border-left:4px solid var(--primary);padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0}
 .warn{background:var(--warn-bg);border-left:4px solid var(--warn-line);padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0}
-sup{color:var(--primary);font-weight:600;font-size:.72em}
+.sign{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 20px}
+.sign .box{border-bottom:2px solid var(--ink);min-height:64px;display:flex;align-items:flex-end;padding-bottom:6px}
+.sign small{display:block;color:var(--muted);margin-top:4px}
 .nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
-.nav button{border:1px solid var(--primary);background:transparent;color:var(--primary);font:inherit;font-weight:600;padding:8px 16px;border-radius:10px;cursor:pointer}
-.nav button:hover{background:var(--soft)}
-.nav button:disabled{opacity:.35;cursor:default;background:transparent}
+.nav button{border:1px solid var(--primary);background:var(--primary);color:#fff;font:inherit;font-weight:600;padding:10px 22px;border-radius:10px;cursor:pointer}
+.nav button#prev{background:transparent;color:var(--primary)}
+.nav button:hover{filter:brightness(1.1)}
+.nav button:disabled{opacity:.35;cursor:default;filter:none}
 .nav button:focus-visible{outline:3px solid var(--primary-dark);outline-offset:2px}
+@media (max-width:620px){.grid,.sign{grid-template-columns:1fr}}
 @media (max-width:520px){.bar{flex-direction:column-reverse;align-items:flex-end}.bar>div{align-self:flex-start}}
+@media print{
+  .nav,.progress,.home{display:none}
+  [role=tabpanel][hidden]{display:block}
+  [role=tabpanel]{break-inside:avoid;margin-bottom:10px}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<header class="hero">
+<header>
 <div class="bar">
-  <p>UNIDAD DE GASTROENTEROLOGÍA · Servicio de Gastroenterología</p>
-  <h1>Consentimiento informado para sedación consciente en endoscopia digestiva (ASA I–II)</h1>
   <a class="home" href="index.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
-      Volver Página Principal
-    </a>
-	</div>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+    Volver Página Principal
+  </a>
+  <div>
+    <p>UNIDAD DE GASTROENTEROLOGÍA · Servicio de Gastroenterología</p>
+    <h1>Consentimiento informado para sedación consciente en endoscopia digestiva (ASA I–II)</h1>
+  </div>
+</div>
 </header>
 
-  <section role="tabpanel" id="p1" aria-labelledby="t1">
+<main>
+<div class="progress" aria-live="polite">
+  <small id="count">Sección 1 de 15</small>
+  <div class="track"><div class="fill" id="fill"></div></div>
+</div>
+
+<section role="tabpanel" id="p1">
   <h2>Datos del paciente</h2>
   <div class="grid">
     <div class="field"><b>Nombre</b><span class="ph">[nombre y apellidos]</span></div>
@@ -90,19 +112,19 @@ sup{color:var(--primary);font-weight:600;font-size:.72em}
   </div>
 </section>
 
-<section role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+<section role="tabpanel" id="p2" hidden>
   <h2><i>1</i>Motivo y descripción del procedimiento</h2>
   <p>Se me ha explicado que el procedimiento indicado es ____________________, cuyo objetivo es <span class="ph">[diagnóstico / tratamiento]</span>. Se me ha informado de lo que ocurrirá antes, durante y después del examen, y de que durante el mismo pueden realizarse maniobras adicionales razonablemente previsibles (toma de biopsias, polipectomía, dilatación, otras: <span class="ph">[especificar]</span>).</p>
 </section>
 
- <section role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+<section role="tabpanel" id="p3" hidden>
   <h2><i>2</i>Sedación propuesta y nivel buscado</h2>
   <p>Se me administrarán medicamentos por vía intravenosa para reducir la ansiedad y las molestias, y para que recuerde menos el procedimiento. El objetivo es una sedación consciente (moderada), tal como la define la Sociedad Americana de Anestesiólogos (ASA): permaneceré somnoliento pero responderé de forma voluntaria cuando se me hable o se me toque suavemente, respiraré por mí mismo sin ayuda y mantendré la función cardiovascular. No se busca una sedación profunda ni anestesia general.</p>
   <div class="chip">Plan de sedación: LIDOCAÍNA, PROPOFOL</div>
   <p style="margin-top:10px">Los fármacos serán administrados y vigilados por personal formado en sedación y monitorización continua.</p>
 </section>
 
- <section role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+<section role="tabpanel" id="p4" hidden>
   <h2><i>3</i>Selección de pacientes</h2>
   <p>Este procedimiento con sedación consciente se ofrece solo a pacientes clasificados como ASA I o II, es decir, personas sanas o con enfermedad sistémica leve y bien controlada. La clasificación se determina en la evaluación previa mediante historia clínica y examen físico. Si presento una enfermedad de mayor gravedad (ASA III o superior), apnea del sueño, obesidad importante, vía aérea difícil u otros factores de riesgo, seré derivado a valoración por anestesiología y podría ser necesario otro tipo de sedación o anestesia.</p>
   <div class="grid" style="margin-top:12px">
@@ -111,17 +133,17 @@ sup{color:var(--primary);font-weight:600;font-size:.72em}
   </div>
 </section>
 
- <section role="tabpanel" id="p5" aria-labelledby="t5" hidden>
+<section role="tabpanel" id="p5" hidden>
   <h2><i>4</i>La sedación es un continuo</h2>
   <p>La respuesta a los medicamentos varía entre personas y la sedación puede hacerse más profunda de lo previsto. Por eso el equipo está capacitado para rescatar a pacientes cuyo nivel de sedación sea más profundo que el buscado, y seré monitorizado de forma continua durante todo el procedimiento. Si esto ocurre, pueden ser necesarias maniobras como elevar el mentón, colocar una cánula en la vía aérea o ventilar con mascarilla.</p>
 </section>
 
- <section role="tabpanel" id="p6" aria-labelledby="t6" hidden>
+<section role="tabpanel" id="p6" hidden>
   <h2><i>5</i>Beneficios</h2>
   <p>La sedación reduce la ansiedad, el dolor y la incomodidad, y facilita la realización completa y segura del examen.</p>
 </section>
 
- <section role="tabpanel" id="p7" aria-labelledby="t7" hidden>
+<section role="tabpanel" id="p7" hidden>
   <h2><i>6</i>Riesgos y posibles efectos adversos de la sedación</h2>
   <p>Se me ha informado de que, aunque la mayoría de los pacientes la toleran bien, pueden presentarse:</p>
   <ul>
@@ -136,12 +158,12 @@ sup{color:var(--primary);font-weight:600;font-size:.72em}
   <div class="warn">El riesgo aumenta si la sedación llega a ser más profunda de lo previsto, y es mayor con edad avanzada, obesidad, apnea del sueño, enfermedad cardíaca o pulmonar, procedimientos largos o complejos, y dosis altas o combinación de sedantes.</div>
 </section>
 
- <section role="tabpanel" id="p8" aria-labelledby="t8" hidden>
+<section role="tabpanel" id="p8" hidden>
   <h2><i>7</i>Riesgos propios del procedimiento</h2>
   <p>Se me han explicado los riesgos específicos de <span class="ph">[procedimiento]</span> (por ejemplo, perforación, hemorragia, infección).</p>
 </section>
 
- <section role="tabpanel" id="p9" aria-labelledby="t9" hidden>
+<section role="tabpanel" id="p9" hidden>
   <h2><i>8</i>Alternativas</h2>
   <ul>
     <li>Realizar el procedimiento sin sedación.</li>
@@ -151,7 +173,7 @@ sup{color:var(--primary);font-weight:600;font-size:.72em}
   </ul>
 </section>
 
- <section role="tabpanel" id="p10" aria-labelledby="t10" hidden>
+<section role="tabpanel" id="p10" hidden>
   <h2><i>9</i>Medidas de preparación y seguridad</h2>
   <ul>
     <li>He cumplido el ayuno indicado: <span class="ph">[6 horas de sólidos / 3 horas de líquidos claros]</span>.</li>
@@ -160,12 +182,12 @@ sup{color:var(--primary);font-weight:600;font-size:.72em}
   </ul>
 </section>
 
- <section role="tabpanel" id="p11" aria-labelledby="t11" hidden>
+<section role="tabpanel" id="p11" hidden>
   <h2><i>10</i>Situaciones graves</h2>
   <p>Se me ha explicado que, en caso de complicación grave, podrían ser necesarias intubación, reanimación, ingreso hospitalario, transfusión o cirugía. Mi preferencia al respecto: <span class="ph">[aceptación / limitaciones: especificar]</span> _________________________________________________.</p>
 </section>
 
- <section role="tabpanel" id="p12" aria-labelledby="t12" hidden>
+<section role="tabpanel" id="p12" hidden>
   <h2><i>11</i>Después del procedimiento</h2>
   <ul>
     <li>Permaneceré en observación hasta recuperar mi estado basal.</li>
@@ -174,7 +196,7 @@ sup{color:var(--primary);font-weight:600;font-size:.72em}
   </ul>
 </section>
 
- <section role="tabpanel" id="p13" aria-labelledby="t13" hidden>
+<section role="tabpanel" id="p13" hidden>
   <h2><i>12</i>Declaraciones del paciente</h2>
   <ul>
     <li>He podido hacer preguntas, las dudas han sido resueltas y la información se me ha dado en un lugar privado y sin presión. <span class="ph">[Intérprete utilizado: sí / no]</span></li>
@@ -184,7 +206,7 @@ sup{color:var(--primary);font-weight:600;font-size:.72em}
   </ul>
 </section>
 
- <section role="tabpanel" id="p14" aria-labelledby="t14" hidden>
+<section role="tabpanel" id="p14" hidden>
   <h2>Firmas</h2>
   <div class="sign">
     <div><div class="box"><span class="ph">[nombre y firma]</span></div><small>Paciente · Fecha y hora: [fecha y hora]</small></div>
@@ -196,7 +218,7 @@ sup{color:var(--primary);font-weight:600;font-size:.72em}
   </div>
 </section>
 
- <section role="tabpanel" id="p15" aria-labelledby="t15" hidden>
+<section role="tabpanel" id="p15" hidden>
   <h2>Revocación del consentimiento</h2>
   <p>Revoco el consentimiento otorgado el <span class="ph">[fecha]</span>.</p>
   <div class="grid">
@@ -204,38 +226,34 @@ sup{color:var(--primary);font-weight:600;font-size:.72em}
     <div class="field"><b>Fecha</b><span class="ph">[fecha]</span></div>
   </div>
 </section>
-<div class="nav">
-    <button id="prev">‹ Anterior</button>
-    <button id="next">Siguiente ›</button>
-  </div>
 
+<div class="nav">
+  <button id="prev" type="button">‹ Anterior</button>
+  <button id="next" type="button">Siguiente ›</button>
 </div>
+</main>
+
 <script>
 (function(){
-  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  var panels=[].slice.call(document.querySelectorAll('[role=tabpanel]'));
   var prev=document.getElementById('prev'),next=document.getElementById('next');
+  var count=document.getElementById('count'),fill=document.getElementById('fill');
   var cur=0;
-  function show(i,focus){
+  function show(i){
     cur=i;
-    tabs.forEach(function(x,j){
-      var on=j===i;
-      x.setAttribute('aria-selected',on);
-      x.tabIndex=on?0:-1;
-      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
-    });
-    prev.disabled=i===0;next.disabled=i===tabs.length-1;
-    tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});
-    if(focus)tabs[i].focus();
+    panels.forEach(function(p,j){p.hidden=j!==i});
+    prev.disabled=i===0;
+    next.disabled=i===panels.length-1;
+    count.textContent='Sección '+(i+1)+' de '+panels.length;
+    fill.style.width=((i+1)/panels.length*100)+'%';
+    window.scrollTo({top:0,behavior:'smooth'});
   }
-  tabs.forEach(function(t,i){
-    t.addEventListener('click',function(){show(i)});
-    t.addEventListener('keydown',function(e){
-      if(e.key==='ArrowRight'){e.preventDefault();show((i+1)%tabs.length,true)}
-      if(e.key==='ArrowLeft'){e.preventDefault();show((i-1+tabs.length)%tabs.length,true)}
-    });
-  });
   prev.addEventListener('click',function(){if(cur>0)show(cur-1)});
-  next.addEventListener('click',function(){if(cur<tabs.length-1)show(cur+1)});
+  next.addEventListener('click',function(){if(cur<panels.length-1)show(cur+1)});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'&&cur<panels.length-1)show(cur+1);
+    if(e.key==='ArrowLeft'&&cur>0)show(cur-1);
+  });
   show(0);
 })();
 </script>
